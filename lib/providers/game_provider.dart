@@ -425,7 +425,7 @@ class GameProvider extends ChangeNotifier {
   /// Retorna lista ordenada de rivais + jogador
   List<Map<String, dynamic>> getRanking() {
     final List<Map<String, dynamic>> all = rivals.map((r) {
-      return {
+      return <String, dynamic>{
         'name': r.name,
         'avatar': r.avatar,
         'netWorth': r.netWorth,
@@ -433,7 +433,7 @@ class GameProvider extends ChangeNotifier {
       };
     }).toList();
 
-    all.add({
+    all.add(<String, dynamic>{
       'name': 'Você',
       'avatar': '👑',
       'netWorth': _balance,

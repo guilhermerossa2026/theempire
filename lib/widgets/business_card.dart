@@ -225,7 +225,25 @@ class BusinessCard extends StatelessWidget {
 
                         const Spacer(),
 
-                        // ── Botão de Upgrade ─────────────────────────
+                        // ── Exibição de Custo ─────────────────────────
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 6),
+                          child: Text(
+                            business.isBroken && !business.hasManager
+                                ? 'Custo de Reparo: ${formatMoney(business.upgradeCost * 0.5)}'
+                                : business.level == 0
+                                    ? 'Custo de Abertura: ${formatMoney(business.initialCost)}'
+                                    : 'Custo Upgrade: ${formatMoney(business.upgradeCost)}',
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+
+                        // ── Botão de Ação ────────────────────────────
                         if (business.isBroken && !business.hasManager)
                           _RepairButton(business: business)
                         else
@@ -289,7 +307,7 @@ class _UpgradeButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            business.level == 0 ? 'ABRIR' : 'UPGRADE',
+            business.level == 0 ? 'ABRIR NEGÓCIO' : 'UPGRADE NÍVEL',
             style: TextStyle(
               color: canAfford ? Colors.black87 : Colors.black38,
               fontWeight: FontWeight.w900,
@@ -330,7 +348,7 @@ class _RepairButton extends StatelessWidget {
             Icon(Icons.build_rounded, color: Colors.white, size: 13),
             SizedBox(width: 4),
             Text(
-              'REPARAR',
+              'REPARAR AGORA',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w900,
